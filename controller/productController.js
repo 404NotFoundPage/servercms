@@ -314,6 +314,47 @@ module.exports={
             }
         })
     },
+    user:function(request,response){
+        let size=request.body.size;
+        let current=request.body.current;
+        modal.user(size,current,function(err,data){
+            if(err==null){
+                response.send({'flag':1,'items':data,'message':'操作成功'});
+            }else{
+                response.send({'flag':1,'message':"操作失败",'reson':err});
+            }
+        })
+    },
+    order:function(request,response,callback){
+        let size=request.body.size;
+        let current=request.body.current;
+        modal.order(size,current,function(err,data){
+            if(err==null){
+                response.send({'flag':1,'items':data,'message':'操作成功'});
+            }else{
+                response.send({'flag':1,'message':"操作失败",'reson':err});
+            }
+        })
+    },
+    login:function (req,res,) {
+        let username = req.body.username;
+        let password = req.body.password;
+        modal.login(username,password,function (err,data) {
+            if(!err){
+                res.send({'flag':1,'items':data,'message':'操作成功'});
+            }else{
+                res.send({'flag':0,'message':"操作失败",'reson':err});
+            }
+        })
+    },
+    headuserId:function (req,res) {
+        let user_id = req.body.user_id;
+        modal.headuserId(user_id,function (err,data) {
+            if(!err){
+                res.send({'flag':1,'items':data,'message':'操作成功'})
+            }
+        })
+    },
     producttypenum:function(request,response){
         modal.producttypenum(function(err,data){
             if(err==null){

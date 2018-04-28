@@ -325,10 +325,36 @@ module.exports={
         sql+=" where pro_type_id="+obj.pro_type_id;
         mydb.connect(sql,arr,callback);
     },
+<<<<<<< HEAD
     deleteProductType:function(pro_type_id,callback){//删除商品类型（新）
         let sql="delete from t_producttype where pro_type_id=?"
         mydb.connect(sql,pro_type_id,callback)
     },
+=======
+<<<<<<< HEAD
+    user:function(size,current,callback){//会员管理请求
+        let start=(current-1)*size;
+        let arr=[start,parseInt(size)];
+        let sql = "select * from t_user limit ?,?";
+        mydb.connect(sql,arr,callback);
+    },
+    order:function(size,current,callback){//订单管理请求
+        let start=(current-1)*size;
+        let arr=[start,parseInt(size)];
+        let sql="update * from t_order,t_orderdetail limit ?,?";
+        mydb.connect(sql,arr,callback);
+    },
+    login:function (username,password,callback) {//管理员登录
+        let arr =[username,password]
+        let sql = "select * from t_admin where user_login= ? and user_psw= ?"
+        mydb.connect(sql,arr,callback);
+    },
+    headuserId:function (user_id,callback) {
+        let arr=[user_id];
+        let sql="select * from t_admin where user_id=?";
+        mydb.connect(sql,arr,callback);
+=======
+>>>>>>> 66ef907f00cc3cef7aa1068197eae2b8d307a5bc
     producttypenum:function(callback){//商品类型数据总量（新）
         let sql="select count(*) as num from t_producttype";
         mydb.connect(sql,null,callback);
@@ -347,5 +373,6 @@ module.exports={
     deleteComments:function(com_id,callback){//删除一条评论
         let sql="delete from t_comment where com_id=?"
         mydb.connect(sql,parseInt(com_id),callback);
+>>>>>>> 51f568259a51b053f81a5a354cf35eaa936aed6d
     }
 };
