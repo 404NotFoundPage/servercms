@@ -20,4 +20,11 @@ router.post('/addProductType.do',controller.addProductType);//增加商品类型
 router.post('/updateProductType.do',controller.updateProductType);//修改商品类型
 router.post('/deleteProductType.do',controller.deleteProductType);//删除商品类型
 
+// 订单管理
+router.post('/order.do',controller.order);//订单管理请求
+// 登录
+router.post('/login.do',controller.login);
+//管理员
+router.post('/headuserId.do',controller.headuserId)
+
 module.exports=router;

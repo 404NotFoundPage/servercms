@@ -323,5 +323,27 @@ module.exports={
         sql=sql.substring(0,sql.length-1);
         sql+=" where pro_type_id="+obj.pro_type_id;
         mydb.connect(sql,arr,callback);
+    },
+    user:function(size,current,callback){//会员管理请求
+        let start=(current-1)*size;
+        let arr=[start,parseInt(size)];
+        let sql = "select * from t_user limit ?,?";
+        mydb.connect(sql,arr,callback);
+    },
+    order:function(size,current,callback){//订单管理请求
+        let start=(current-1)*size;
+        let arr=[start,parseInt(size)];
+        let sql="update * from t_order,t_orderdetail limit ?,?";
+        mydb.connect(sql,arr,callback);
+    },
+    login:function (username,password,callback) {//管理员登录
+        let arr =[username,password]
+        let sql = "select * from t_admin where user_login= ? and user_psw= ?"
+        mydb.connect(sql,arr,callback);
+    },
+    headuserId:function (user_id,callback) {
+        let arr=[user_id];
+        let sql="select * from t_admin where user_id=?";
+        mydb.connect(sql,arr,callback);
     }
 };
