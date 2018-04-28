@@ -34,9 +34,24 @@ module.exports={
         let arr=[];
         mydb.connect(sql,arr,callback);
     },
+    UPdateNewProduct: function (pro_id,pro_new,callback) { //修改新品推荐  /0为旧商品 1 新商品
+        let sql='UPDATE t_productinfo SET pro_new = ? WHERE pro_id = ?';
+        let arr=[parseInt(pro_new),parseInt(pro_id)];
+        mydb.connect(sql,arr,callback);
+    },
+    Obtainshop: function (callback) { //获取所有商品
+        let sql='SELECT * FROM t_productinfo';
+        let arr=[];
+        mydb.connect(sql,arr,callback);
+    },
     UserCase: function (callback) {//获取用户案例
         let sql='SELECT * FROM t_cass';
         let arr=[];
+        mydb.connect(sql,arr,callback);
+    },
+    UpdataUserCase: function (cass_id,cass_total,cass_condition,callback) {//修改用户案例
+        let sql='UPDATE t_cass SET cass_total =? ,cass_condition=? WHERE cass_id =?';
+        let arr=[cass_total,cass_condition,cass_id];
         mydb.connect(sql,arr,callback);
     }
 };

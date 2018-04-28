@@ -65,7 +65,7 @@ module.exports={   //获取爆款推荐
             }
         })
     },
-    NewProduct:function(request,response){  //��ȡ��Ʒ�Ƽ�
+    NewProduct:function(request,response){  //获取新品推荐
         modal.NewProduct(function (err,data) {
             if(err){
                 console.log(err)
@@ -75,6 +75,28 @@ module.exports={   //获取爆款推荐
                 }else{
                     response.send(data)
                 }
+            }
+        })
+    },
+    UPdateNewProduct:function(request,response){  //修改新品  /0为旧商品 1 新商品
+        let pro_id = request.body.pro_id;  // 商品id
+        let pro_new = request.body.pro_new; // 商品新旧状态
+        console.log("进来了");
+        modal.UPdateNewProduct(pro_id,pro_new,function (err,data) {
+            if(err){
+                console.log(err)
+            }else{
+                console.log(data);
+                response.send(data)
+            }
+        })
+    },
+    Obtainshop:function(request,response){  //获取所有商品
+        modal.Obtainshop(function (err,data) {
+            if(err){
+                console.log(err)
+            }else{
+                response.send(data)
             }
         })
     },
@@ -88,6 +110,18 @@ module.exports={   //获取爆款推荐
                 }else{
                     response.send(data)
                 }
+            }
+        })
+    },
+    UpdataUserCase:function(request,response){  //修改用户案例  修改上架状态和用户案例
+        let  cass_id=request.body.cass_id;
+        let  cass_total=request.body.cass_total;
+        let  cass_condition=request.body.cass_condition;
+        modal.UpdataUserCase(cass_id,cass_total,cass_condition,function (err,data) {
+            if(err){
+                console.log(err)
+            }else{
+                response.send(data)
             }
         })
     }
