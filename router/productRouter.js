@@ -20,20 +20,19 @@ router.post('/addProductType.do',controller.addProductType);//增加商品类型
 router.post('/updateProductType.do',controller.updateProductType);//修改商品类型
 router.post('/deleteProductType.do',controller.deleteProductType);//删除商品类型
 
-<<<<<<< HEAD
+
 // 订单管理
 router.post('/order.do',controller.order);//订单管理请求
 // 登录
 router.post('/login.do',controller.login);
 //管理员
 router.post('/headuserId.do',controller.headuserId)
-=======
+
 router.post('/producttypenum.do',controller.producttypenum);//获取商品类型数据量（新）
 
 router.post('/productContent.do',controller.productContent)//单件商品详情内容
 router.post('/productComments.do',controller.productComments)//单件商品评论内容
 router.post('/deleteComments.do',controller.deleteComments)//删除一条评论内容
 
->>>>>>> 51f568259a51b053f81a5a354cf35eaa936aed6d
 
 module.exports=router;
