@@ -352,6 +352,46 @@ module.exports={
         modal.headuserId(user_id,function (err,data) {
             if(!err){
                 res.send({'flag':1,'items':data,'message':'操作成功'})
+            }
+        })
+    },
+    producttypenum:function(request,response){
+        modal.producttypenum(function(err,data){
+            if(err==null){
+                response.send({'flag':1,'items':data,'message':'操作成功'})
+            }else{
+                response.send({'flag':-1,'message':'操作失败','reson':err})
+            }
+        })
+    },
+    productContent:function(request,response){//单件商品详情内容
+        let pro_id=request.body.pro_id;
+        console.log(pro_id);
+        modal.productContent(pro_id,function(err,data){
+            if(!err){
+                response.send(data)
+            }else{
+                console.log(err);
+            }
+        })
+    },
+    productComments:function(request,response){//单件商品评论内容
+        let pro_id=request.body.pro_id;
+        console.log(pro_id);
+        modal.productComments(pro_id,function(err,data){
+            if(!err){
+                response.send(data)
+            }else{
+                console.log(err);
+            }
+        })
+    },
+    deleteComments:function(request,response){//删除一条评论内容
+        let com_id=request.body.com_id;
+        console.log(com_id);
+        modal.deleteComments(com_id,function(err,data){
+            if(!err){
+                response.send(data)
             }else{
                 console.log(err);
             }

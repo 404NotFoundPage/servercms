@@ -5,7 +5,8 @@ const mydb = db.sqlpool();
 module.exports={
     //商品管理
     productDetails:function(size,current,callback){//商品详情管理请求
-        let sql="select * from t_productinfo,t_productimg,t_producttext";
+        let sql="select * from t_productinfo,t_productimg,t_producttext where t_productinfo.pro_id=t_productimg.pro_id "+
+        " and t_productinfo.pro_id=t_producttext.pro_id";
         sql+=" limit ?,?";
         let start=(current-1)*size;
         mydb.connect(sql,[start,parseInt(size)],callback);
@@ -324,6 +325,7 @@ module.exports={
         sql+=" where pro_type_id="+obj.pro_type_id;
         mydb.connect(sql,arr,callback);
     },
+<<<<<<< HEAD
     user:function(size,current,callback){//会员管理请求
         let start=(current-1)*size;
         let arr=[start,parseInt(size)];
@@ -345,5 +347,25 @@ module.exports={
         let arr=[user_id];
         let sql="select * from t_admin where user_id=?";
         mydb.connect(sql,arr,callback);
+=======
+    producttypenum:function(callback){//商品类型数据总量（新）
+        let sql="select count(*) as num from t_producttype";
+        mydb.connect(sql,null,callback);
+    },
+    productContent:function(pro_id,callback){
+        let arr = [pro_id]
+        console.log(pro_id)
+        let sql='SELECT * FROM t_productinfo AS a LEFT JOIN (SELECT pro_id AS apro_id,pro_img_url FROM t_productimg WHERE pro_img_status=1) AS b ON a.pro_id=b.apro_id LEFT JOIN t_producttype AS g ON a.pro_type_id=g.pro_type_id WHERE a.pro_id=?'
+        mydb.connect(sql,arr,callback);
+    },
+    productComments:function(pro_id,callback){
+        let arr = [pro_id]
+        let sql='SELECT * FROM t_comment left join t_user on t_user.user_id=t_comment.user_id WHERE pro_id=?'
+        mydb.connect(sql,arr,callback);
+    },
+    deleteComments:function(com_id,callback){//删除一条评论
+        let sql="delete from t_comment where com_id=?"
+        mydb.connect(sql,parseInt(com_id),callback);
+>>>>>>> 51f568259a51b053f81a5a354cf35eaa936aed6d
     }
 };
