@@ -325,6 +325,10 @@ module.exports={
         sql+=" where pro_type_id="+obj.pro_type_id;
         mydb.connect(sql,arr,callback);
     },
+    deleteProductType:function(pro_type_id,callback){//删除商品类型（新）
+        let sql="delete from t_producttype where pro_type_id=?"
+        mydb.connect(sql,pro_type_id,callback)
+    },
     producttypenum:function(callback){//商品类型数据总量（新）
         let sql="select count(*) as num from t_producttype";
         mydb.connect(sql,null,callback);
