@@ -44,6 +44,16 @@ module.exports={
         let arr=[];
         mydb.connect(sql,arr,callback);
     },
+    queyruser: function (callback) { //获取所有用户id
+        let sql='SELECT user_id FROM t_user';
+        let arr=[];
+        mydb.connect(sql,arr,callback);
+    },
+    addprouser: function (cass_id,user_id,cass_title,cass_total,cass_condition,cass_img_urll,callback) { //添加案列
+        let sql='INSERT INTO t_cass VALUES (?,?,?,?,?,?)';
+        let arr=[cass_id,user_id,cass_title,cass_total,cass_img_urll,cass_condition];
+        mydb.connect(sql,arr,callback);
+    },
     UserCase: function (callback) {//获取用户案例
         let sql='SELECT * FROM t_cass';
         let arr=[];

@@ -15,6 +15,8 @@ router.post("/ObtainGoods.do",controller.ObtainGoods); //获取不是爆款的�
 router.post("/NewProduct.do",controller.NewProduct); //获取新品
 router.post("/UPdateNewProduct.do",controller.UPdateNewProduct); //获取新品
 router.post("/Obtainshop.do",controller.Obtainshop); //获取所有商品
+router.post("/queyruser.do",controller.queyruser); //获取所有用户id
+router.post("/addprouser.do",controller.addprouser); //添加案列
 
 
 
