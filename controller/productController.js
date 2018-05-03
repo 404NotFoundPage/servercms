@@ -100,6 +100,8 @@ module.exports={
         if(pro_type_name!=''&&pro_type_name!=undefined){
             obj.pro_type_name=pro_type_name
         }
+        obj.size=request.body.size;
+        obj.current=request.body.current;
         modal.searchProductType(obj,function(err,data){
             if(err==null){
                 response.send({'flag':1,'items':data,'message':'操作成功'})

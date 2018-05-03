@@ -117,8 +117,8 @@ module.exports={
         if(obj.pro_type_name!=undefined){
             sql+=" and pro_type_name like '%"+obj.pro_type_name+"%'"
         }
+        sql+=" limit "+(obj.current-1)*obj.size+","+obj.size+""
         mydb.connect(sql,arr,callback)
-        console.log(sql)
     },
     searchProduct:function(obj,callback){
         let arr=[]
@@ -133,7 +133,6 @@ module.exports={
         }
         sql+=" limit "+(obj.current-1)*obj.size+","+obj.size+""
         mydb.connect(sql,arr,callback)
-        console.log(sql)
     },
     updateProduct:function(obj,callback){//修改商品详情
         let arr=[];
