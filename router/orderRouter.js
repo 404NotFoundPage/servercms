@@ -9,6 +9,6 @@ router.post("/readTheOrder.do",controller.readTheOrder);   //读取订单
 router.post("/readOneOrder.do",controller.readOneOrder)// 读取某条订单
 router.post("/AmendTheOrder.do",controller.AmendTheOrder);   //修改订单状态
 router.post("/totalNumber.do",controller.totalNumber);   //查询总条数
-
+router.post('/dddetails.do',controller.dddetails);//查看详情
 
 module.exports=router;

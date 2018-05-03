@@ -325,6 +325,10 @@ module.exports={
         sql+=" where pro_type_id="+obj.pro_type_id;
         mydb.connect(sql,arr,callback);
     },
+    deleteProductType:function(pro_type_id,callback){//删除商品类型（新）
+        let sql="delete from t_producttype where pro_type_id=?"
+        mydb.connect(sql,pro_type_id,callback)
+    },
     user:function(size,current,callback){//会员管理请求
         let start=(current-1)*size;
         let arr=[start,parseInt(size)];
