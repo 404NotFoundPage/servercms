@@ -17,6 +17,22 @@ module.exports={
         let sql="select * from t_producttype limit ?,?";
         mydb.connect(sql,arr,callback);
     },
+    getProductNum:function(callback){//获取商品数据总量
+        let sql="select count(*) as num from t_productinfo,t_productimg,t_producttext where t_productinfo.pro_id=t_productimg.pro_id "+
+        " and t_productinfo.pro_id=t_producttext.pro_id";
+        mydb.connect(sql,null,callback);
+    },
+    getSearchProductNum:function(pro_name,pro_condition,callback){//获取搜索数据总量
+        let sql="select count(*) as num from t_productinfo,t_productimg,t_producttext where "+
+        " t_productinfo.pro_id=t_productimg.pro_id and t_productinfo.pro_id=t_producttext.pro_id";
+        if(pro_condition!=undefined){
+            sql+=" and pro_condition=?"
+        }
+        if(pro_name!=undefined){
+            sql+=" and pro_name like '%"+pro_name+"%'"
+        }
+        mydb.connect(sql,pro_condition,callback);
+    },
     addProduct:function(obj,callback){//增加商品详情
         let arr=[];
         let sqlstr='';
@@ -91,13 +107,36 @@ module.exports={
         let sql="insert into t_productinfo("+sqlstr+")  values("+str+")"
         mydb.connect(sql,null,callback);
     },
+    searchProductType:function(obj,callback){
+        let arr=[]
+        let sql="select * from t_producttype where 1=1";
+        if(obj.pro_type_condition!=undefined){
+            arr.push(obj.pro_type_condition);
+            sql+=" and pro_type_condition=?"
+        }
+        if(obj.pro_type_name!=undefined){
+            sql+=" and pro_type_name like '%"+obj.pro_type_name+"%'"
+        }
+        sql+=" limit "+(obj.current-1)*obj.size+","+obj.size+""
+        mydb.connect(sql,arr,callback)
+    },
+    searchProduct:function(obj,callback){
+        let arr=[]
+        let sql="select * from t_productinfo,t_productimg,t_producttext where "+
+        " t_productinfo.pro_id=t_productimg.pro_id and t_productinfo.pro_id=t_producttext.pro_id";
+        if(obj.pro_condition!=undefined){
+            arr.push(obj.pro_condition);
+            sql+=" and pro_condition=?"
+        }
+        if(obj.pro_name!=undefined){
+            sql+=" and pro_name like '%"+obj.pro_name+"%'"
+        }
+        sql+=" limit "+(obj.current-1)*obj.size+","+obj.size+""
+        mydb.connect(sql,arr,callback)
+    },
     updateProduct:function(obj,callback){//修改商品详情
         let arr=[];
         let sql="update t_productinfo set ";
-        // if(obj.pro_id!=undefined){
-        //     sql+='pro_id=?,'
-        //     arr.push(parseInt(obj.pro_id));
-        // }
         if(obj.pro_type_id!=undefined){
             sql +=" pro_type_id=?,";
             arr.push(parseInt(obj.pro_type_id));
@@ -159,24 +198,13 @@ module.exports={
         mydb.connect(sql,arr,callback);
     },
     deleteProduct:function(pro_id,callback){//删除商品详情
-        // DELETE FROM t_productinfo, t_producttext,t_productimg
-        // USING t_productinfo, t_producttext,t_productimg 
-        // WHERE t_productinfo.pro_id=t_producttext.pro_id
-        // AND t_productimg.pro_id=t_productinfo.pro_id
-        // AND t_productinfo.pro_id=21;
-        let sql="update t_productinfo set pro_condition=1 where pro_id=?"
-        console.log(sql)
-        mydb.connect(sql,parseInt(pro_id),callback);
+        let sql="delete from  t_productinfo where pro_id=? "
+        mydb.connect(sql,pro_id,callback);
     },
     addProductText:function(obj,callback){//增加商品详情
         let arr=[];
         let sqlstr='';
         let str='';
-        //pro_text_id自动增长
-        // if(obj.pro_text_id!=undefined){
-        //     sqlstr +='pro_id,'
-        //     arr.push(parseInt(obj.pro_id));
-        // }
         if(obj.pro_id!=undefined){
             sqlstr +="pro_id,";
             arr.push(obj.pro_id)
@@ -196,7 +224,6 @@ module.exports={
         for(var i=0;i<arr.length;i++){
             str += arr[i]+','
         }
-        
         sqlstr=sqlstr.substring(0,sqlstr.length-1);
         str=str.substring(0,str.length-1);
         let sql="insert into t_producttext("+sqlstr+")  values("+str+")"

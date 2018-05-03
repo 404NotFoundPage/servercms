@@ -5,8 +5,11 @@ module.exports={
    user:function(request,response){
         let size=request.body.size;
         let current=request.body.current;
+        console.log(size)
+        console.log(current)
         modal.user(size,current,function(err,data){
             if(err==null){
+              console.log(123)
                 response.send({'flag':1,'items':data,'message':'操作成功'});
             }else{
                 response.send({'flag':1,'message':"操作失败",'reson':err});
@@ -26,8 +29,7 @@ module.exports={
   //会员管理
   userCancellation:function (request,response) {//会员注销
     let user_id = request.body.user_id;
-    console.log(user_id)
-    usermodal.userCancellation(user_id,function (err,data) {
+    modal.userCancellation(user_id,function (err,data) {
       if(err==null){
         response.send({'flag':1,'items':data,'message':'操作成功'});
       }else{
@@ -36,11 +38,21 @@ module.exports={
     })
 
   },
+  userdetails:function(request,response){//会员个人信息
+    let user_id=request.body.user_id;
+    modal.userdetails(user_id,function(err,data){
+      if(err==null){
+        response.send(data)
+      }else{
+        response.send(err)
+      }
+    })
+  },
   //会员查看-收货地址
   useraddress:function (request,response) {
     let user_id = request.body.user_id;
     console.log(user_id)
-    usermodal.useraddress(user_id,function (err,data) {
+    modal.useraddress(user_id,function (err,data) {
       if(err==null){
         response.send({'flag':1,'items':data,'message':'操作成功'});
       }else{
@@ -53,7 +65,11 @@ module.exports={
     let size = request.body.size;  //页
     let current = request.body.current; //条
     let user_id = request.body.user_id;
-    usermodal.userorder(size, current,user_id,function (err,data) {
+    console.log('size:'+size)
+    console.log('current:'+current)
+    console.log('user_id:'+user_id)
+    modal.userorder(size, current,user_id,function (err,data) {
+      console.log(data)
       if(err){
        console.log(err)
       }else{
@@ -67,9 +83,8 @@ module.exports={
   },
   //会员查询-购物车
   usershoppingcart:function (request,response) {
-    console.log("2222222222222222")
     let user_id = request.body.user_id;
-    usermodal.usershoppingcart(user_id,function (err,data) {
+    modal.usershoppingcart(user_id,function (err,data) {
       if(err){
         console.log(err)
       }else{
@@ -84,7 +99,29 @@ module.exports={
   //会员查询-收藏夹
   usercollection:function (request,response) {
     let user_id = request.body.user_id;
-    usermodal.usercollection(user_id,function (err,data) {
+    modal.usercollection(user_id,function (err,data) {
+      if(err==null){
+        response.send({'flag':1,'items':data,'message':'操作成功'})
+      }else{
+        response.send({'flag':1,'message':'操作成功','reson':err});
+      }
+    })
+  },
+  //用户订单数量
+  userordernumber:function(request,response){
+    let user_id =request.body.user_id;
+    modal.userordernumber(user_id,function(err,data){
+      if(err==null){
+        response.send({'flag':1,'items':data,'message':'操作成功'})
+      }else{
+        response.send({'flag':1,'message':'操作成功','reson':err});
+      }
+    })
+  },
+  //用户评论
+  usercomment:function(request,response){
+    let user_id =request.body.user_id;
+    modal.usercomment(user_id,function(err,data){
       if(err==null){
         response.send({'flag':1,'items':data,'message':'操作成功'})
       }else{

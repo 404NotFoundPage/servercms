@@ -24,6 +24,16 @@ module.exports={
             }
         })
     },
+
+    getProductNum:function(request,response){//获取商品数据总量
+        modal.getProductNum(function(err,data){
+            if(err==null){
+                response.send({'flag':1,'items':data,'message':'操作成功'});
+            }else{
+                response.send({'flag':1,'message':"操作失败",'reson':err});
+            }
+        })
+    },
     addProduct:function(request,response){//增加商品详情
         let obj={};
         if(request.body.pro_id!=undefined){
@@ -78,6 +88,46 @@ module.exports={
                 response.send({'flag':'-1','message':'操作失败','reson':err})
             }
             
+        })
+    },
+    searchProductType:function(request,response){//搜索商品类型
+        let pro_type_condition=request.body.pro_type_condition;
+        let pro_type_name=request.body.pro_type_name;
+        let obj={};
+        if(pro_type_condition!=null&&pro_type_condition!=''&&pro_type_condition!=undefined){
+            obj.pro_type_condition=pro_type_condition
+        }
+        if(pro_type_name!=''&&pro_type_name!=undefined){
+            obj.pro_type_name=pro_type_name
+        }
+        obj.size=request.body.size;
+        obj.current=request.body.current;
+        modal.searchProductType(obj,function(err,data){
+            if(err==null){
+                response.send({'flag':1,'items':data,'message':'操作成功'})
+            }else{
+                response.send({'flag':-1,'message':'操作失败','reson':err})
+            }
+        })
+    },
+    searchProduct:function(request,response){
+        let pro_condition=request.body.pro_condition;
+        let pro_name=request.body.pro_name;
+        let obj={};
+        obj.size=request.body.size;
+        obj.current=request.body.current;
+        if(pro_condition!=null&&pro_condition!=''&&pro_condition!=undefined){
+            obj.pro_condition=pro_condition
+        }
+        if(pro_name!=''&&pro_name!=undefined){
+            obj.pro_name=pro_name
+        }
+        modal.searchProduct(obj,function(err,data){
+            if(err==null){
+                response.send({'flag':1,'items':data,'message':'操作成功'})
+            }else{
+                response.send({'flag':-1,'message':'操作失败','reson':err})
+            }
         })
     },
     updateProduct:function(request,response){//修改商品详情
@@ -138,7 +188,6 @@ module.exports={
     },
     deleteProduct:function(request,response){//删除商品详情
         let pro_id = request.body.pro_id;
-        console.log(pro_id)
         modal.deleteProduct(pro_id,function(err,data){
             console.log(err);
             console.log(data);
@@ -336,7 +385,7 @@ module.exports={
             }
         })
     },
-    login:function (req,res,) {
+    login:function (req,res) {
         let username = req.body.username;
         let password = req.body.password;
         modal.login(username,password,function (err,data) {
@@ -361,6 +410,17 @@ module.exports={
                 response.send({'flag':1,'items':data,'message':'操作成功'})
             }else{
                 response.send({'flag':-1,'message':'操作失败','reson':err})
+            }
+        })
+    },
+    getSearchProductNum:function(request,response){
+        let pro_name=request.body.pro_name;
+        let pro_condition=request.body.pro_condition;
+        modal.getSearchProductNum(pro_name,pro_condition,function(err,data){
+            if(err==null){
+                response.send({'flag':1,'items':data,'message':'操作成功'});
+            }else{
+                response.send({'flag':1,'message':"操作失败",'reson':err});
             }
         })
     },
