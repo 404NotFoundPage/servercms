@@ -27,12 +27,12 @@ module.exports={
   },
   //会员查询-最近购买
   userorder:function (size,current,user_id,callback) {
-    let start = (size-1)*current;
+    let start = (current-1)*size;
     console.log(size)
     console.log(start)
     console.log(current)
     let arr = [user_id,start,parseInt(current)];
-    let sql="SELECT * FROM t_order WHERE user_id = ? AND order_pay =1 ORDER BY order_time DESC limit ?,?"
+    let sql="SELECT * FROM t_order,t_orderdetail,t_productinfo  WHERE t_productinfo.pro_id=t_orderdetail.pro_id and   t_order.order_id=t_orderdetail.order_id and user_id = ? AND order_pay =1 ORDER BY order_time DESC limit ?,?"
     mydb.connect(sql,arr,callback);
   },
   //会员查询-购物车
@@ -46,5 +46,20 @@ module.exports={
   usercollection:function (user_id,callback) {
     let sql="SELECT * FROM t_collection WHERE user_id = ?"
     mydb.connect(sql,parseInt(user_id),callback);
-  }
+  },
+    //会员订单总数
+    userordernumber:function(user_id,callback){
+      let sql="select count(*) as num from t_order where user_id=?";
+      mydb.connect(sql,parseInt(user_id),callback);
+    },
+    //用户评论
+    usercomment:function(user_id,callback){
+      let sql="select pro_img_url,com_reply,com_message_date,com_message_count,pro_name from t_comment,t_productinfo,t_productimg where t_comment.pro_id=t_productinfo.pro_id"+
+      " and t_comment.pro_id=t_productimg.pro_id and user_id=?";
+      mydb.connect(sql,user_id,callback)
+    },
+    userdetails:function(user_id,callback){//会员个人信息
+      let sql="select * from t_user where user_id=?";
+      mydb.connect(sql,user_id,callback)
+    },
 };
