@@ -31,7 +31,7 @@ module.exports={
         mydb.connect(sql,arr,callback);
     },
     readOneOrder:function(order_id,callback){//读取某条订单
-        let sql = 'select * from t_order where order_id=?';
+        let sql = 'SELECT * FROM t_order,t_user WHERE t_order.user_id=t_user.user_id and t_order.order_id=?';
         let arr = [order_id];
         mydb.connect(sql,arr,callback)
     },
