@@ -45,58 +45,72 @@ module.exports={
         if(obj.pro_type_id!=undefined){
             sqlstr +=" pro_type_id,";
             arr.push(parseInt(obj.pro_type_id));
+            console.log("1"+arr)
         }
         if(obj.pro_name!=undefined){
             sqlstr +="pro_name,";
-            arr.push(obj.pro_name)
+            arr.push("'"+obj.pro_name+"'");
+            console.log("2"+arr)
         }
         if(obj.pro_amount!=undefined){
             sqlstr +="pro_amount,";
             arr.push(parseInt(obj.pro_amount));
+            console.log("3"+arr)
         }
         if(obj.pro_price!=undefined){
             sqlstr +="pro_price,";
-            arr.push(obj.pro_price)
+            arr.push(obj.pro_price);
+            console.log("4"+arr)
         }
         if(obj.pro_discount!=undefined){
             sqlstr +="pro_discount,";
-            arr.push(obj.pro_discount)
+            arr.push(obj.pro_discount);
+            console.log("5"+arr)
         }
         if(obj.pro_size!=undefined){
             sqlstr +="pro_size,";
-            arr.push(obj.pro_size)
+            arr.push(obj.pro_size);
+            console.log("6"+arr)
         }
         if(obj.pro_deal_amount!=undefined){
             sqlstr +="pro_deal_amount,";
             arr.push(parseInt(obj.pro_deal_amount));
+            console.log("7"+arr)
         }
         if(obj.pro_look_amount!=undefined){
             sqlstr +="pro_look_amount,";
-            arr.push(parseInt(obj.pro_look_amount))
+            arr.push(parseInt(obj.pro_look_amount));
+            console.log("8"+arr)
         }
         if(obj.pro_storetime!=undefined){
             sqlstr +="pro_storetime,";
-            arr.push("'"+obj.pro_storetime+"'")
+            arr.push("'"+obj.pro_storetime+"'");
+            console.log("9"+arr)
         }
         if(obj.pro_info!=undefined){
             sqlstr +="pro_info,";
             arr.push("'"+obj.pro_info+"'")
+            console.log("10"+arr)
         }
         if(obj.pro_hot!=undefined){
             sqlstr +="pro_hot,";
             arr.push(parseInt(obj.pro_hot))
+            console.log("11"+arr)
         }
         if(obj.pro_bao!=undefined){
             sqlstr +="pro_bao,";
             arr.push(parseInt(obj.pro_bao))
+            console.log("12"+arr)
         }
         if(obj.pro_new!=undefined){
             sqlstr +="pro_new,";
             arr.push(parseInt(obj.pro_new))
+            console.log("13"+arr)
         }
         if(obj.pro_condition!=undefined){
             sqlstr +="pro_condition,";
             arr.push(parseInt(obj.pro_condition))
+            console.log("14"+arr)
         }
         for(var i=0;i<arr.length;i++){
             str += arr[i]+','
@@ -104,7 +118,8 @@ module.exports={
         
         sqlstr=sqlstr.substring(0,sqlstr.length-1);
         str=str.substring(0,str.length-1);
-        let sql="insert into t_productinfo("+sqlstr+")  values("+str+")"
+        let sql="insert into t_productinfo("+sqlstr+")  values("+str+")";
+        console.log(arr+sql);
         mydb.connect(sql,null,callback);
     },
     searchProductType:function(obj,callback){

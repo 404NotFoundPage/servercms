@@ -6,6 +6,7 @@ const mysession=require('express-session');//引用express-session
 const router=require('./router/router.js');
 const Orderrouter=require('./router/orderRouter.js');  //订单页面路由
 const ContentRouter=require('./router/ContentRouter.js');  //订单页面路由
+const uploadrouter=require('./router/upload.js'); //上传头像
 const myapp=myexpress();
 
 //配置session
@@ -31,6 +32,7 @@ myapp.use(bodyparser.urlencoded({extended:false}));
 myapp.use(router);  //
 myapp.use(Orderrouter);  // 订单使用路由
 myapp.use(ContentRouter);  // 内容使用路由
+myapp.use(uploadrouter);  // 上传头像
 
 myapp.use(myexpress.static(__dirname+'/public'));
 
