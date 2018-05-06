@@ -63,11 +63,27 @@ module.exports={   //获取爆款推荐
         })
     },
     NewProduct:function(request,response){  //获取新品推荐
-        modal.NewProduct(function (err,data) {
+        let size=request.body.size;
+        let num =(parseInt(size)-1)*6;
+        modal.NewProduct(num,function (err,data) {
             if(err){
                 console.log(err)
             }else{
                 if(data.length>0){
+                    response.send(data)
+                }else{
+                    response.send(data)
+                }
+            }
+        })
+    },
+    zhnagsan:function(request,response){  //获取新品推荐
+        modal.zhnagsan(function (err,data) {
+            if(err){
+                console.log(err)
+            }else{
+                if(data.length>0){
+                    console.log(data);
                     response.send(data)
                 }else{
                     response.send(data)

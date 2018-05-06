@@ -29,8 +29,13 @@ module.exports={
         let arr=[];
         mydb.connect(sql,arr,callback);
     },
-    NewProduct: function (callback) { //获取新品推荐
-        let sql='SELECT * FROM t_productinfo WHERE pro_new=1';
+    NewProduct: function (num,callback) { //获取新品推荐
+        let sql='SELECT * FROM t_productinfo WHERE pro_new=1 limit ?,6';
+        let arr=[num];
+        mydb.connect(sql,arr,callback);
+    },
+    zhnagsan: function (callback) { //获取新品推荐
+        let sql='SELECT count(1) as xx FROM t_productinfo WHERE pro_new=1';
         let arr=[];
         mydb.connect(sql,arr,callback);
     },

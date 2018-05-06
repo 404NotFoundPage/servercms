@@ -17,10 +17,11 @@ router.post("/UPdateNewProduct.do",controller.UPdateNewProduct); //获取新品
 router.post("/Obtainshop.do",controller.Obtainshop); //获取所有商品
 router.post("/queyruser.do",controller.queyruser); //获取所有用户id
 router.post("/addprouser.do",controller.addprouser); //添加案列
-
+router.post("/zhnagsan.do",controller.zhnagsan); //查询所有条数
 
 
 
 router.post("/UserCase.do",controller.UserCase); //获取用户案列
+
 router.post("/UpdataUserCase.do",controller.UpdataUserCase);//修改用户案例
 module.exports=router;
