@@ -73,4 +73,14 @@ module.exports={
             }
         })
     },
+    dddetails:function (request,response) {  //订单详情
+        let order_id = parseInt(request.body.order_id);
+        modal.dddetails(order_id,function (err,data) {  
+            if(!err){
+                response.send(data)
+            }else{
+                console.log(err)
+            }
+        })
+    }
 };

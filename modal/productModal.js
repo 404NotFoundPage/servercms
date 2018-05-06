@@ -273,6 +273,7 @@ module.exports={
         mydb.connect(sql,parseInt(pro_text_id),callback);
     },
     addProductImg:function(obj,callback){//增加商品图片
+        console.log("竟来了")
         let arr=[];
         let sqlstr='';
         let str='';
@@ -299,6 +300,7 @@ module.exports={
         sqlstr=sqlstr.substring(0,sqlstr.length-1);
         str=str.substring(0,str.length-1);
         let sql="insert into t_productimg("+sqlstr+")  values("+str+")"
+        console.log(sql)
         mydb.connect(sql,null,callback);
     },
     updateProductImg:function(obj,callback){//增加商品图片

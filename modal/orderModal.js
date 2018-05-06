@@ -31,7 +31,7 @@ module.exports={
         mydb.connect(sql,arr,callback);
     },
     readOneOrder:function(order_id,callback){//读取某条订单
-        let sql = 'select * from t_order where order_id=?';
+        let sql = 'SELECT * FROM t_order,t_user WHERE t_order.user_id=t_user.user_id and t_order.order_id=?';
         let arr = [order_id];
         mydb.connect(sql,arr,callback)
     },
@@ -65,6 +65,11 @@ module.exports={
         if(parseInt(OrderQuerysend)==0){
             sql+=" and t_order.order_status=1"
         }
+        mydb.connect(sql,arr,callback);
+    },
+    dddetails:function(order_id,callback){//查询详情
+        let arr = [order_id];
+        let sql = "SELECT * from t_order as t_or join t_orderdetail as t_orde on t_or.order_id=t_orde.order_id JOIN t_productinfo as t_proi on t_proi.pro_id = t_orde.pro_id join t_user as t_u on t_u.user_id=t_or.user_id where t_or.order_id =?";
         mydb.connect(sql,arr,callback);
     }
 };
