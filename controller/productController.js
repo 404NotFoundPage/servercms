@@ -36,77 +36,58 @@ module.exports={
     },
     addProduct:function(request,response){//增加商品详情
         let obj={};
-        console.log(request.body.pro_type_id)
         if(request.body.pro_id!=undefined){
-            obj.pro_id=parseInt(request.body.pro_id);
+            obj.pro_id=request.body.pro_id;
         }
         if(request.body.pro_type_id!=undefined){
-            obj.pro_type_id=parseInt(request.body.pro_type_id);
-
+            obj.pro_type_id=request.body.pro_type_id;
         }
         if(request.body.pro_name!=undefined){
             obj.pro_name=request.body.pro_name;
         }
         if(request.body.pro_amount!=undefined){
-            obj.pro_amount=parseInt(request.body.pro_amount);
+            obj.pro_amount=request.body.pro_amount;
         }
         if(request.body.pro_price!=undefined){
-            obj.pro_price=parseInt(request.body.pro_price);
+            obj.pro_price=request.body.pro_price;
         }
         if(request.body.pro_discount!=undefined){
-            obj.pro_discount=parseInt(request.body.pro_discount);
+            obj.pro_discount=request.body.pro_discount;
         }
         if(request.body.pro_size!=undefined){
             obj.pro_size=request.body.pro_size;
         }
         if(request.body.pro_deal_amount!=undefined){
-            obj.pro_deal_amount=parseInt(request.body.pro_deal_amount);
+            obj.pro_deal_amount=request.body.pro_deal_amount;
         }
         if(request.body.pro_look_amount!=undefined){
-            obj.pro_look_amount=parseInt(request.body.pro_look_amount);
+            obj.pro_look_amount=request.body.pro_look_amount;
         }
         if(request.body.pro_storetime!=undefined){
-            obj.pro_storetime=request.body.pro_storetime
+            obj.pro_storetime=request.body.pro_storetime;
         }
         if(request.body.pro_info!=undefined){
             obj.pro_info=request.body.pro_info;
         }
         if(request.body.pro_hot!=undefined){
-            obj.pro_hot=parseInt(request.body.pro_hot);
+            obj.pro_hot=request.body.pro_hot;
         }
         if(request.body.pro_bao!=undefined){
-            obj.pro_bao=parseInt(request.body.pro_bao);
+            obj.pro_bao=request.body.pro_bao;
         }
         if(request.body.pro_new!=undefined){
-            obj.pro_new=parseInt(request.body.pro_new);
+            obj.pro_new=request.body.pro_new;
         }
         if(request.body.pro_condition!=undefined){
-            obj.pro_condition=parseInt(request.body.pro_condition);
+            obj.pro_condition=request.body.pro_condition;
         }
-
-        // 添加图片
-
-        obj.pro_img_url=request.body.pro_img_url;
-        obj.pro_img_status=0;
-        obj.pro_img_coditon=0;
-        console.log("添加图片");
         modal.addProduct(obj,function(err,data){
             if(err==null){
-                console.log(data.insertId);
-                obj.pro_id=data.insertId
-                modal.addProductImg(obj,function(err,data){
-                    if(err==null){
-                        console.log("成功")
-                        response.send({'flag':1,'items':data,'message':'操作成功'});
-                    }else{
-                       console.log("失败")
-                        response.send({'flag':'-1','message':'操作失败','reson':err})
-                    }
-
-                })
+                response.send(data);
             }else{
                 response.send({'flag':'-1','message':'操作失败','reson':err})
             }
+            
         })
     },
     searchProductType:function(request,response){//搜索商品类型
@@ -469,6 +450,18 @@ module.exports={
         let com_id=request.body.com_id;
         console.log(com_id);
         modal.deleteComments(com_id,function(err,data){
+            if(!err){
+                response.send(data)
+            }else{
+                console.log(err);
+            }
+        })
+    },
+    submitComments:function(request,response){//提交一条评论内容回复
+        let com_id=request.body.com_id;
+        let content=request.body.content2;
+        console.log(com_id);
+        modal.submitComments(content,com_id,function(err,data){
             if(!err){
                 response.send(data)
             }else{

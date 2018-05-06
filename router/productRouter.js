@@ -36,5 +36,5 @@ router.post('/producttypenum.do',controller.producttypenum);//获取商品类型
 router.post('/productContent.do',controller.productContent)//单件商品详情内容
 router.post('/productComments.do',controller.productComments)//单件商品评论内容
 router.post('/deleteComments.do',controller.deleteComments)//删除一条评论内容
-
+router.post('/submitComments.do',controller.submitComments)//提交一条评论内容回复
 module.exports=router;
