@@ -4,26 +4,26 @@
 
 var  multer=require('multer');
 var storage = multer.diskStorage({
-    //ÉèÖÃÉÏ´«ºóÎÄ¼şÂ·¾¶£¬uploadsÎÄ¼ş¼Ğ»á×Ô¶¯´´½¨¡£
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½ï¿½ï¿½uploadsï¿½Ä¼ï¿½ï¿½Ğ»ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     destination: function (req, file, cb) {
         cb(null, './public/uploads')
     },
-    //¸øÉÏ´«ÎÄ¼şÖØÃüÃû£¬»ñÈ¡Ìí¼Óºó×ºÃû
+    //ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Óºï¿½×ºï¿½ï¿½
     filename: function (req, file, cb) {
         var fileFormat = (file.originalname).split(".");
         cb(null, file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
     }
 });
-//Ìí¼ÓÅäÖÃÎÄ¼şµ½muler¶ÔÏó¡£
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½mulerï¿½ï¿½ï¿½ï¿½
 var upload = multer({
     storage: storage
 });
 
-//ÈçĞèÆäËûÉèÖÃ£¬Çë²Î¿¼multerµÄlimits,Ê¹ÓÃ·½·¨ÈçÏÂ¡£
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Î¿ï¿½multerï¿½ï¿½limits,Ê¹ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¡ï¿½
 //var upload = multer({
 //    storage: storage,
 //    limits:{}
 // });
 
-//µ¼³ö¶ÔÏó
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 module.exports = upload;
