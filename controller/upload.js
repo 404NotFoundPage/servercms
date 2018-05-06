@@ -17,13 +17,18 @@ module.exports={
             }
             //文件信息在req.file或者req.files中显示。
             console.log(req.files[0]);
-            let uploadsrc =req.files[0].destination+"/";
-            let uploadfilename = req.files[0].filename;
-            let uploadsrcstring= uploadsrc+uploadfilename;
-            uploadsrcstring = uploadsrcstring.substring(8);
-            uploadsrcstring = "http://localhost:9999"+uploadsrcstring;
-            console.log(uploadsrcstring);
-            res.send(uploadsrcstring)
+            if(req.files[0]){
+                let uploadsrc =req.files[0].destination+"/";
+                let uploadfilename = req.files[0].filename;
+                let uploadsrcstring= uploadsrc+uploadfilename;
+                uploadsrcstring = uploadsrcstring.substring(8);
+                uploadsrcstring = "http://localhost:9999"+uploadsrcstring;
+                console.log(uploadsrcstring);
+                res.send(uploadsrcstring)
+            }else{
+                res.send("")
+            }
+
         });
     }
 };

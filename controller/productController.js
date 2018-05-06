@@ -83,9 +83,27 @@ module.exports={
         if(request.body.pro_condition!=undefined){
             obj.pro_condition=parseInt(request.body.pro_condition);
         }
+
+        // 添加图片
+
+        obj.pro_img_url=request.body.pro_img_url;
+        obj.pro_img_status=0;
+        obj.pro_img_coditon=0;
+        console.log("添加图片");
         modal.addProduct(obj,function(err,data){
             if(err==null){
-                response.send(data);
+                console.log(data.insertId);
+                obj.pro_id=data.insertId
+                modal.addProductImg(obj,function(err,data){
+                    if(err==null){
+                        console.log("成功")
+                        response.send({'flag':1,'items':data,'message':'操作成功'});
+                    }else{
+                       console.log("失败")
+                        response.send({'flag':'-1','message':'操作失败','reson':err})
+                    }
+
+                })
             }else{
                 response.send({'flag':'-1','message':'操作失败','reson':err})
             }
